@@ -12,18 +12,20 @@ func RunAsynchronous(group *sync.WaitGroup) {
 
 	group.Add(1)
 
-	fmt.Println("Hello", group)
+	fmt.Println("Hello")
 	time.Sleep(1 * time.Second)
 }
 
 func TestWaitGroup(t *testing.T) {
 	group := &sync.WaitGroup{}
+	x := 0
 
 	for i := 0; i < 100; i++ {
 		go RunAsynchronous(group)
+		x = x + 1
 	}
 
 	group.Wait()
 
-	fmt.Println("Selesai")
+	fmt.Println("Selesai, Data =", x)
 }
